@@ -3,11 +3,26 @@ Scrap data from the Production Requirements Planning or Workcenter Inventory Req
 an excel sheet for importation to Monday.com
 
 Versions of python and installed modules: 
-python 3.7.8
-selenium 3.141.0
-ChromeDriver 80.0.3987.106
-Visual Studio 16.7.7
-openpyxl 3.0.5
+- python 3.7.8
+- selenium 3.141.0
+- ChromeDriver 80.0.3987.106
+- Visual Studio 16.7.7
+- openpyxl 3.0.5
 
 Requirements:
 Plex login for Wanco
+
+When I asked one of the people who assigned me this project, "Are we using the Production Requirements Planning (PRP) method or
+the Workcenter Inventory Requirements (WIR) method?" They responded with, "both of them." So this readme is gonna cover both
+methods like the program. At the moment, the only functional method is PRP. The WIR method isn't even in the code yet, and it may
+stay that way depending on what others require of this.
+
+Preliminary procedure:
+The program utilizes the selenium module and the ChromeDriver to create a chrome web driver. This driver opens a new window for
+Plex and logs in using the provided credentials. Once in, the driver will navigate to either the PRP page or WIR page.
+
+PRP method:
+On the PRP page, the script will change the following search criteria: the time frame window will be set to 1 week, the requirements
+only box is checked, the suppress forecast box is checked, and the planning group is Drawbar Planning. Many results are likely to
+appear. The program gets the total qty needed of a part, which is likely negative. Next, the program will click on the part name,
+and then the Bill of Materials.
