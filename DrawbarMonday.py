@@ -20,12 +20,6 @@ def locate_by_id(web_driver, id):
             EC.presence_of_element_located((By.ID, id))).click()
     # Returns nothing
 
-def locate_by_hyperlink(web_driver, link):
-    """Clicks on a hyperlink."""
-    WebDriverWait(web_driver, 10).until(
-            EC.presence_of_element_located((By.LINK_TEXT, link))).click()
-    # Returns nothing
-
 def locate_by_class(web_driver, class_name):
     """Clicks on something by class name."""
     WebDriverWait(web_driver, 10).until(
