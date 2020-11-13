@@ -1,5 +1,5 @@
 # Drawbar
-Scrap data from the Production Requirements Planning or Workcenter Inventory Requirements page of Plex. Then, put that data onto
+Scrape data from the Production Requirements Planning or Workcenter Inventory Requirements page of Plex. Then, put that data onto
 an excel sheet for importation to Monday.com
 
 Versions of python and installed modules: 
