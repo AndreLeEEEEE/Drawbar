@@ -32,9 +32,13 @@ def PRP(driver):
     comp_des = []
     def collect_drawbars(overall_qty):
         # Returns a list of all needed components from a Bill of Materials.
+        # Used for traversing Bill of Materials since component numbers and their 
+        # descriptions use the NoWrap class
         no_wraps = driver.find_elements_by_class_name("NoWrap")
-        nw_row = 4
+        nw_row = 4  # Initialize to 4 since the boxes we need start at 4
+        # Keep track of the previous box since it provides help with reading info.
         previous_link = None
+        # Component numbers and their qty's are links
         material_links = driver.find_elements_by_xpath("//a[@href]")
         for m_link in material_links:
             if re.search("Plexus_Control", m_link.get_attribute("href")):
@@ -42,10 +46,14 @@ def PRP(driver):
                     partNo = m_link.text.split("@")
                     comp_name.append(partNo[0].strip())
                     qty = re.findall("\d", previous_link.text)
+                    # Multiply component qty by part qty
                     comp_qty.append(int(''.join(qty)) * totals_needed[overall_qty])
                     comp_des.append(no_wraps[nw_row].text)
+                # Go to the next description after each component box
                 nw_row += 2
+            # This gets updated after each link
             previous_link = m_link
+
     # Navigate to PRP page
     menuNodes = ["tableMenuNode1", "tableMenuNode4", "tableMenuNode6", "tableMenuNode1"]
     for node in menuNodes:
@@ -82,7 +90,7 @@ def PRP(driver):
         raise Exception("There's nothing to scrape")
     time.sleep(2)
 
-    for index in range(list_size):  # Come back and replace 3 with list_size after testing
+    for index in range(list_size):
         # Links on a page change if you navigate to
         # another page and come back. Thus, I can't
         # find all relevant links and store them into
@@ -107,6 +115,7 @@ def PRP(driver):
                     break  # Exit the nearest for loop
                 encountered += 1
 
+    # Combine duplicates and put everything scrapped into another data structure
     seen = {}
     for index, name in enumerate(comp_name):
         if name not in seen:
@@ -134,14 +143,14 @@ def PRP(driver):
         sheet_obj.cell(row=index+2, column=6).value = "Paint"
         sheet_obj.cell(row=index+2, column=7).value = "REQUESTED"
         sheet_obj.cell(row=index+2, column=8).value = "ST Pull"
-
+    # This creates a new excel workbook in the program's directory
     wb_obj.save("Drawbar request list.xlsx")
 
 try:
     # Getting into Plex
     driver = webdriver.Chrome("chromedriver.exe")
     driver.get("https://www.plexonline.com/modules/systemadministration/login/index.aspx?")
-
+    # Will need to change the credentials later
     driver.find_element_by_name("txtUserID").send_keys("w.Andre.Le")
     driver.find_element_by_name("txtPassword").send_keys("ThisExpires7")
     driver.find_element_by_name("txtCompanyCode").send_keys("wanco")
