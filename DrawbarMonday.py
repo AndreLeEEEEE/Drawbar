@@ -27,11 +27,12 @@ def locate_by_class(web_driver, class_name):
     # Returns nothing
 
 def PRP(driver):
+    """Create an excel sheet for Monday.com consisting of drawbars."""
     comp_name = []
     comp_qty = []
     comp_des = []
     def collect_drawbars(overall_qty):
-        # Returns a list of all needed components from a Bill of Materials.
+        """Returns a list of all needed components from a Bill of Materials"""
         # Used for traversing Bill of Materials since component numbers and their 
         # descriptions use the NoWrap class
         no_wraps = driver.find_elements_by_class_name("NoWrap")
