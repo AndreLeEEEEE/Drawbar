@@ -4,6 +4,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import Select
+from selenium.webdriver.common.action_chains import ActionChains
 import time
 import openpyxl
 import re
@@ -27,12 +28,11 @@ def locate_by_class(web_driver, class_name):
     # Returns nothing
 
 def PRP(driver):
-    """Create an excel sheet for Monday.com consisting of drawbars."""
     comp_name = []
     comp_qty = []
     comp_des = []
     def collect_drawbars(overall_qty):
-        """Returns a list of all needed components from a Bill of Materials"""
+        # Returns a list of all needed components from a Bill of Materials.
         # Used for traversing Bill of Materials since component numbers and their 
         # descriptions use the NoWrap class
         no_wraps = driver.find_elements_by_class_name("NoWrap")
@@ -56,10 +56,16 @@ def PRP(driver):
             previous_link = m_link
 
     # Navigate to PRP page
-    menuNodes = ["tableMenuNode1", "tableMenuNode4", "tableMenuNode6", "tableMenuNode1"]
-    for node in menuNodes:
-        locate_by_id(driver, node)
-        time.sleep(0.5)
+    action = ActionChains(driver)
+    action.key_down(Keys.CONTROL).send_keys('M').key_up(Keys.CONTROL).perform()
+    action = 404
+    time.sleep(1)
+    action = ActionChains(driver)
+    action.send_keys("PRP").send_keys(Keys.RETURN).perform()
+    action = 404
+    time.sleep(1)
+    action = ActionChains(driver)
+    action.send_keys(Keys.RETURN).perform()
 
     # Fill out the search criteria
     time.sleep(2)
