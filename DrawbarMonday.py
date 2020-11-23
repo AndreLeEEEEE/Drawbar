@@ -156,12 +156,24 @@ def PRP(driver):
 try:
     # Getting into Plex
     driver = webdriver.Chrome("chromedriver.exe")
-    driver.get("https://www.plexonline.com/modules/systemadministration/login/index.aspx?")
-    # Will need to change the credentials later
-    driver.find_element_by_name("txtUserID").send_keys("w.Andre.Le")
-    driver.find_element_by_name("txtPassword").send_keys("ThisExpires7")
-    driver.find_element_by_name("txtCompanyCode").send_keys("wanco")
-    locate_by_id(driver, "btnLogin")
+    driver.get("https://accounts.plex.com/interaction/fea73869-0eda-4f67-b381-c167be521da6#ilp=woW7Rk4HS5ijknMk0L8Jjl8&ie=1606149525001")
+    parent = "//form[@class='form-horizontal']//div[@class='plex-idp-wrapper']"  # Allows access to input fields, which are hidden
+    # Enter in company code
+    form = driver.find_element_by_xpath(parent + "//div[@id='companyCodeInput']//div[@class='col-sm-12']//input[@id='inputCompanyCode3']")
+    form.send_keys("wanco")
+    action = ActionChains(driver)
+    action.send_keys(Keys.RETURN).perform()
+    time.sleep(.5)
+    # Enter in username
+    form = driver.find_element_by_xpath(parent + "//div[@id='usernameInput']//div[@class='col-sm-12']//input[@id='inputUsername3']")
+    form.send_keys("w.mc.tester")
+    action.perform()
+    time.sleep(.5)
+    # Enter in password
+    form = driver.find_element_by_xpath(parent + "//div[@id='passwordInput']//div[@class='col-sm-12']//input[@id='inputPassword3']")
+    form.send_keys("test1wanco")
+    action.perform()
+    time.sleep(.5)
     driver.switch_to.window(driver.window_handles[1])
     time.sleep(3)
     PRP(driver)
