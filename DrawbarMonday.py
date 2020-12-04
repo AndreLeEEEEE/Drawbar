@@ -41,14 +41,13 @@ def PRP(driver):
         previous_link = None
         # Component numbers and their qty's are links
         material_links = driver.find_elements_by_xpath("//a[@href]")
-        for m_link in material_links:
+        for m_link in material_links:  # Cycle through each link on the page
             if re.search("Plexus_Control", m_link.get_attribute("href")):
                 if re.search("-P", m_link.text) or re.search("-E", m_link.text):
-                    partNo = m_link.text.split("@")
+                    partNo = m_link.text.split("@")  # Separate out the @Rev
                     comp_name.append(partNo[0].strip())
-                    qty = re.findall("\d", previous_link.text)
-                    # Multiply component qty by part qty
-                    comp_qty.append(int(''.join(qty)) * totals_needed[overall_qty])
+                    qty = re.findall("\d", previous_link.text)  # Get just the numbers from qty
+                    comp_qty.append(int(''.join(qty)) * totals_needed[overall_qty])  # Multiply component qty by part qty
                     comp_des.append(no_wraps[nw_row].text)
                 # Go to the next description after each component box
                 nw_row += 2
