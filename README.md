@@ -21,7 +21,9 @@ stay that way depending on what others require of this.
 Update 11/23/2020: Since Kevin has confirmed the PRP method is doing what it's supposed to, there's no need to implement the WIR
 method. The executable for this program exists and needs to be tested on another computer without the necessary construction tools
 installed. Once physical restrictions are lifted, the executable needs to be demoed to Kit and someone else. I'm also still 
-waiting on test Plex credentials so I can take my own out.
+waiting on test Plex credentials so I can take my own out
+
+Update 12/4/2020: I now have generic Plex credentials.
 
 Preliminary procedure:
 The program utilizes the selenium module and the ChromeDriver to create a chrome web driver. This driver opens a new window for
