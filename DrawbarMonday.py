@@ -138,7 +138,7 @@ def PRP(driver):
     # Write data to new excel sheet
     wb_obj = openpyxl.Workbook()
     sheet_obj = wb_obj.active
-    headers = ["Part No", "Description", "Qty", "Location", "Deliver to", "Status", "Request From"]
+    headers = ["part number", "name", "qty", "location", "Deliver to", "Status", "Request From"]
     for i in range(2, 9):
         sheet_obj.cell(row=1, column=i).value = headers[i-2]
     for index, key in enumerate(seen):
