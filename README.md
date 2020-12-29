@@ -27,6 +27,8 @@ Update 12/4/2020: I now have generic Plex credentials.
 
 Update 12/18/2020: Back to my credentials since the generic account got nerfed in terms of what pages it can access.
 
+Update 12/29/2020: Updated the column headers to match the new ones on the Material Request board.
+
 Preliminary procedure:
 The program utilizes the selenium module and the ChromeDriver to create a chrome web driver. This driver opens a new window for
 Plex and logs in using the provided credentials. Once in, the driver will navigate to either the PRP page or WIR page.
