@@ -156,11 +156,11 @@ def PRP(driver):
 try:
     # Getting into Plex
     driver = webdriver.Chrome("chromedriver.exe")
-    remote.get("https://www.plexonline.com/modules/systemadministration/login/index.aspx?")
-    remote.find_element_by_name("txtUserID").send_keys("w.Andre.Le")
-    remote.find_element_by_name("txtPassword").send_keys("OokyOoki2")
-    remote.find_element_by_name("txtCompanyCode").send_keys("wanco")
-    locate_by_id(remote, "btnLogin")
+    driver.get("https://www.plexonline.com/modules/systemadministration/login/index.aspx?")
+    driver.find_element_by_name("txtUserID").send_keys("w.Andre.Le")
+    driver.find_element_by_name("txtPassword").send_keys("OokyOoki2")
+    driver.find_element_by_name("txtCompanyCode").send_keys("wanco")
+    locate_by_id(driver, "btnLogin")
     driver.switch_to.window(driver.window_handles[1])
     time.sleep(3)
     PRP(driver)
